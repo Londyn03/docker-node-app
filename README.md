@@ -37,7 +37,15 @@ Your task is to containerize this existing application using Docker. You need to
 4. Verify the application works by accessing it in your browser
 
 ## Starting the Application
+### Build the image
+```bash
+docker build -t my-node-app .
+```
 
+### Run the container
+```bash
+docker run -d -p 3000:3000 --name my-node-container my-node-app
+```
 - To build the docker image run the command:
 
 ```bash
@@ -52,6 +60,9 @@ Your task is to containerize this existing application using Docker. You need to
 
 ## Reflection Question
 **Answer the following question in the space below**: How does containerization with Docker differ from using virtual machines, and why might a development team choose Docker containers over VMs for deploying applications like the one you just containerized?
+Virtual machines emulate an entire computer, including hardware, and each VM runs its own full guest operating system on top of a hypervisor. Docker containers instead share the host machine's OS kernel and only package the application with its dependencies and runtime, isolated from other processes. Because of this, containers are much lighter than VMs: they are typically megabytes rather than gigabytes, start in seconds rather than minutes, and use far less CPU and memory.
+
+A development team might choose Docker over VMs for an application like this Node.js app because containers are faster to build, start, and scale, and many can run on a single machine. The Dockerfile also documents the environment as code, so every developer and server runs the identical setup, which avoids the "it works on my machine" problem. This portability makes containers a good fit for CI/CD pipelines and cloud deployment. VMs still make sense when stronger isolation is needed or when a different operating system must be run, but for deploying a simple web app, containers are the more efficient choice.
 
 
 
